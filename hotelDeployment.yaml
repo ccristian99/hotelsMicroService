@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotels-microservice-deployment
+  labels:
+    app: hotels-microservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hotels-microservice
+  template:
+    metadata:
+      labels:
+        app: hotels-microservice
+    spec:
+      containers:
+      - name: hotels-microservice
+        image: ccristian99l/hotels-microservice:v1.0.0
+        ports:
+        - containerPort: 8000
