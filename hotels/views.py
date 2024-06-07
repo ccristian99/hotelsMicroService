@@ -73,9 +73,28 @@ def list_hotels_city(request, city):
 def list_hotels_id_url(request, id):
     # Obtener todos los registros de la base de datos
     hotel = Hotels.objects.filter(id=id)
-    print("First Image:", hotel)
     # Crear una instancia del serializador y pasar los objetos obtenidos
     serializer = HotelsSerializerImageOne(hotel, many=True)
+
+    # Devolver una respuesta en formato JSON con los datos serializados
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def hotel_by_id(request, id):
+    # Obtener todos los registros de la base de datos
+    hotel = Hotels.objects.filter(id=id)
+    # Crear una instancia del serializador y pasar los objetos obtenidos
+    serializer = HotelsSerializer(hotel, many=True)
+
+    # Devolver una respuesta en formato JSON con los datos serializados
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def hotel_by_name(request, hotelname):
+    # Obtener todos los registros de la base de datos
+    hotel = Hotels.objects.filter(hotelname=hotelname)
+    # Crear una instancia del serializador y pasar los objetos obtenidos
+    serializer = HotelsSerializer(hotel, many=True)
 
     # Devolver una respuesta en formato JSON con los datos serializados
     return Response(serializer.data)
